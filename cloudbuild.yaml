@@ -1,0 +1,30 @@
+options:
+  logging: CLOUD_LOGGING_ONLY
+
+steps:
+  # Step 1: Build the Docker image with the tag for pushing to Artifact Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'us-east1-docker.pkg.dev/${_PROJECT}/${_REPO}/${_APP}-${_ENVIRONMENT}:latest', '.']
+
+  # Step 2: Push the image to Artifact Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'us-east1-docker.pkg.dev/${_PROJECT}/${_REPO}/${_APP}-${_ENVIRONMENT}:latest']
+
+  # Step 3: Deploy the image to Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args: [
+      'run', 'deploy', '${_APP}',
+      '--image', 'us-east1-docker.pkg.dev/${_PROJECT}/${_REPO}/${_APP}-${_ENVIRONMENT}:latest',
+      '--region', 'us-east1',
+      '--platform', 'managed',
+      '--set-env-vars', 'APP=${_API_KEY}',
+      '--set-env-vars', 'API_KEY=${_API_KEY}',
+      '--set-env-vars', 'DOCS_USERNAME=${_DOCS_USERNAME}',
+      '--set-env-vars', 'DOCS_PASSWORD=${_DOCS_PASSWORD}',
+      '--set-env-vars', 'ENVIRONMENT=${_ENVIRONMENT}',
+      '--allow-unauthenticated'
+    ]
+
+# Timeout configuration
+timeout: '1600s'
