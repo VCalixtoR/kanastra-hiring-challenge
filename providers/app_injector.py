@@ -1,6 +1,6 @@
 from injector import Binder, Injector, Module
-from providers.implementations import CustomUvicornLogger, EnvironmentHandler
-from providers.interfaces import ICustomUvicornLogger, IEnvironmentHandler
+from .implementations import CustomUvicornLogger, EnvironmentHandler, SQLAlchemyORM
+from .interfaces import ICustomUvicornLogger, IEnvironmentHandler, ISQLAlchemyORM
 
 class AppModule(Module):
     def configure(self, binder: Binder):
@@ -10,6 +10,12 @@ class AppModule(Module):
             ICustomUvicornLogger,
             to=CustomUvicornLogger(
                 app=env_handler.getenv("APP"), environment=env_handler.getenv("ENVIRONMENT")
+            )
+        )
+        binder.bind(
+            ISQLAlchemyORM,
+            to=SQLAlchemyORM(
+                db_url=env_handler.getenv("DB_CONN_STRING")
             )
         )
 
