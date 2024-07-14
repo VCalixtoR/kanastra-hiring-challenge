@@ -4,19 +4,19 @@ options:
 steps:
   # Step 1: Build the Docker image with the tag for pushing to Artifact Registry
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'us-east1-docker.pkg.dev/${_PROJECT}/${_REPO}/${_APP}-${_ENVIRONMENT}:latest', '.']
+    args: ['build', '-t', 'us-central1-docker.pkg.dev/${_PROJECT}/${_REPO}/${_APP}-${_ENVIRONMENT}:latest', '.']
 
   # Step 2: Push the image to Artifact Registry
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'us-east1-docker.pkg.dev/${_PROJECT}/${_REPO}/${_APP}-${_ENVIRONMENT}:latest']
+    args: ['push', 'us-central1-docker.pkg.dev/${_PROJECT}/${_REPO}/${_APP}-${_ENVIRONMENT}:latest']
 
   # Step 3: Deploy the image to Cloud Run
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: gcloud
     args: [
       'run', 'deploy', '${_APP}',
-      '--image', 'us-east1-docker.pkg.dev/${_PROJECT}/${_REPO}/${_APP}-${_ENVIRONMENT}:latest',
-      '--region', 'us-east1',
+      '--image', 'us-central1-docker.pkg.dev/${_PROJECT}/${_REPO}/${_APP}-${_ENVIRONMENT}:latest',
+      '--region', 'us-central1',
       '--platform', 'managed',
       '--set-env-vars', 'APP=${_APP}',
       '--set-env-vars', 'API_KEY=${_API_KEY}',
