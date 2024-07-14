@@ -2,6 +2,7 @@
 defaultSettings.json
 downloaded_files
 notebooks
+sqlite/*
 
 # IDE based
 .idea/
