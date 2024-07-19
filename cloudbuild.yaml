@@ -20,6 +20,7 @@ steps:
       '--platform', 'managed',
       '--set-env-vars', 'APP=${_APP}',
       '--set-env-vars', 'API_KEY=${_API_KEY}',
+      '--set-env-vars', 'DB_CONN_STRING=${_DB_CONN_STRING}',
       '--set-env-vars', 'DOCS_USERNAME=${_DOCS_USERNAME}',
       '--set-env-vars', 'DOCS_PASSWORD=${_DOCS_PASSWORD}',
       '--set-env-vars', 'ENVIRONMENT=${_ENVIRONMENT}',
