@@ -21,7 +21,7 @@ class SQLAlchemyORM:
         class DebtBillsAutomation(self.Base):
             __tablename__ = 'debt_bills_automation'
 
-            debtID = Column(String, primary_key=True, default=str(uuid.uuid4()))
+            debtId = Column(String, primary_key=True, default=str(uuid.uuid4()))
             name = Column(String)
             governmentId = Column(String)
             email = Column(String)
