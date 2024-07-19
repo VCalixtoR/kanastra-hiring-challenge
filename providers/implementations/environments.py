@@ -25,6 +25,11 @@ class EnvironmentHandler(IEnvironmentHandler):
             "required": True
         },
         {
+            "key": "DB_CONN_STRING",
+            "type": str,
+            "required": True
+        },
+        {
             "key": "DOCS_USERNAME",
             "type": str,
             "required": False,

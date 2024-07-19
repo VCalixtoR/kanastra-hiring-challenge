@@ -1,0 +1,8 @@
+This folder is only to store sqlite local databases.
+There is a entry in the gitignore to do not commit things in this folder.
+
+For ORM scenarios, Sqlite is a good database to test things locally before going to dev and production.
+    Its lightweight, you do not have permission or connection problems and you can still see their instances in other tools
+    using the .db file
+
+    As we are using ORM, the changes will be commited to the dev/prod databases when we use their connections

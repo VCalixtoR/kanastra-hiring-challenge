@@ -1,10 +1,13 @@
 name: fast-api-sample
 
 services:
-  ie-requests:
+
+  fast-api-api:
     build:
       context: .
       dockerfile: Dockerfile
+    volumes:
+      - ./sqlite:/app/sqlite
     ports:
       - 8080:8080
     shm_size: '2g'
