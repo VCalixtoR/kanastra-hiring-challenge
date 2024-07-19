@@ -51,12 +51,21 @@ Esta solução usa de CI CD para subir esta aplicação para um Cloud Run da GCP
 - Aplicar commits semanticos
 - Se a infraestrutura for complexa, usar IaC com Terraform, Serverless ou outros
 
+**Use a URL do meu Cloud Run para testar**:
+- https://file-processing-app-eweas3aeiq-uc.a.run.app
+- Enviarei a environment do postman com as variaveis sensiveis de acesso.
+
 ## 💻 Execução local
 
 Para executar localmente:
 - Verifique se o docker e docker-compose estao funcionais na sua maquina
 - Crie um .env com base no .env.example (Para agilidade apenas copie o arquivo e renomeie)
 - Execute `docker-compose up` (A base de dados será criada com os modelos ORMs no caso do Sqlite)
+- Envie requests: Use a collection e environment do postman presentes na seção docs deste repositório (Autenticações já estarão configuradas). AS rotas são:
+- - GET {API_URL}/
+- - GET {API_URL}/docs
+- - GET {API_URL}/health
+- - POST {API_URL}/process-file
 
 ## 🤔 Como contribuir
 
